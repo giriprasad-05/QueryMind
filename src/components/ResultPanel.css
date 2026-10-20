@@ -1,0 +1,105 @@
+/* ==========================================================================
+   Phase 10 — Result Panel
+   ========================================================================== */
+
+.result-panel {
+  min-height: 250px;
+  display: flex;
+  flex-direction: column;
+}
+
+.result-panel-inner {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* For table scroll */
+  padding: 0; /* Let table bleed or handle its own padding */
+}
+
+/* ── Error State ─────────────────────────────────────────────────────────── */
+.result-error-area {
+  background: rgba(239, 68, 68, 0.05);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-radius: var(--radius-md);
+  margin: 16px;
+  padding: 16px;
+}
+
+.result-error-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--error);
+  font-weight: 600;
+  font-size: 13px;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.result-error-msg {
+  color: var(--text-main);
+  font-size: 13px;
+  font-family: var(--font-mono);
+  white-space: pre-wrap;
+}
+
+/* ── Result Table ────────────────────────────────────────────────────────── */
+.result-table-container {
+  flex: 1;
+  overflow: auto;
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
+}
+
+.result-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-main);
+  text-align: left;
+}
+
+.result-table th {
+  background: var(--bg-surface-elevated);
+  color: var(--text-secondary);
+  font-weight: 600;
+  padding: 10px 16px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  border-bottom: 1px solid var(--border-subtle);
+  border-right: 1px solid var(--border-subtle);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-size: 11px;
+}
+
+.result-table th:last-child {
+  border-right: none;
+}
+
+.result-table td {
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border-subtle);
+  border-right: 1px solid var(--border-subtle);
+}
+
+.result-table td:last-child {
+  border-right: none;
+}
+
+.result-table tr:hover {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.result-table tr:last-child td {
+  border-bottom: none;
+}
+
+.result-table td.numeric {
+  color: #fcd34d;
+}
+
+.null-val {
+  color: var(--text-dim);
+  font-style: italic;
+}

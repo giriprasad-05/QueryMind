@@ -1,0 +1,137 @@
+/* ==========================================================================
+   Phase 9 — IR Panel
+   ========================================================================== */
+
+.ir-panel {
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+}
+
+.ir-results-area {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  height: 100%;
+}
+
+.ir-results-area.error-area {
+  background: rgba(239, 68, 68, 0.05);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-radius: var(--radius-md);
+  margin: 16px;
+  padding: 16px;
+}
+
+.ir-error-header {
+  color: var(--error);
+  font-weight: 600;
+  font-size: 13px;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.ir-error-msg {
+  color: var(--text-main);
+  font-size: 13px;
+}
+
+.ir-json-view {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-main);
+  background: var(--bg-surface-elevated);
+  padding: 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+  overflow-x: auto;
+  margin: 0;
+}
+
+/* Structured View */
+.ir-structured-view {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+}
+
+.ir-block {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ir-section-title {
+  color: var(--text-dim);
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.05em;
+}
+
+.ir-val {
+  color: var(--text-main);
+}
+
+.ir-val.indent {
+  padding-left: 12px;
+}
+
+.ir-val.operator {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.ir-val.table {
+  color: #6ee7b7; /* green */
+}
+
+.ir-val.column {
+  color: #c4b5fd; /* purple */
+}
+
+.ir-val.number {
+  color: #fcd34d; /* yellow */
+}
+
+.ir-val.string {
+  color: #fdba74; /* orange */
+}
+
+.ir-filters-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-left: 12px;
+}
+
+.ir-filter-block {
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+  gap: 4px;
+}
+
+.ir-filter-row {
+  display: flex;
+  align-items: center;
+}
+
+.ir-key {
+  color: var(--text-dim);
+  font-size: 11px;
+  width: 80px;
+  flex-shrink: 0;
+}
+
+.ir-filter-sub {
+  margin-top: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}

@@ -1,0 +1,19 @@
+/* Phase 9 SQL Highlighting */
+
+.sql-keyword {
+  color: #c4b5fd; /* purple */
+  font-weight: 600;
+}
+
+.sql-string {
+  color: #fdba74; /* orange */
+}
+
+.sql-number {
+  color: #fcd34d; /* yellow */
+}
+
+.sql-line {
+  display: flex;
+  white-space: pre-wrap;
+}

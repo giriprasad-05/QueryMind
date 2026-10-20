@@ -1,0 +1,143 @@
+/* ==========================================================================
+   Phase 8 — Semantic Analysis Panel
+   ========================================================================== */
+
+.semantic-panel {
+  min-height: 250px;
+  display: flex;
+  flex-direction: column;
+}
+
+.semantic-results-area {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ── Live Annotations ────────────────────────────────────────────────────── */
+.semantic-annotations {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+}
+
+.semantic-annotation-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-surface-elevated);
+  border-left: 2px solid transparent;
+  animation: fadeInRow 0.3s ease-out;
+}
+
+@keyframes fadeInRow {
+  from { opacity: 0; transform: translateX(-5px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.semantic-annotation-row.check-row {
+  color: var(--text-dim);
+  border-left-color: var(--accent);
+}
+
+.semantic-annotation-row.success-row {
+  color: var(--success);
+  background: rgba(16, 185, 129, 0.05);
+  border-left-color: var(--success);
+}
+
+.semantic-annotation-row.error-row {
+  color: var(--error);
+  background: rgba(239, 68, 68, 0.05);
+  border-left-color: var(--error);
+}
+
+.annotation-icon {
+  flex-shrink: 0;
+}
+
+/* ── Error List ──────────────────────────────────────────────────────────── */
+.semantic-error-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: rgba(239, 68, 68, 0.05);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-radius: var(--radius-md);
+  padding: 12px;
+  animation: slideDownError 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideDownError {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.semantic-error-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--error);
+  font-weight: 600;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid rgba(239, 68, 68, 0.2);
+  padding-bottom: 8px;
+}
+
+.semantic-error-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-bottom: 8px;
+}
+
+.semantic-error-item:not(:last-child) {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.semantic-error-msg {
+  color: var(--text-main);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.semantic-err-detail {
+  font-size: 12px;
+  color: var(--text-dim);
+}
+
+.semantic-err-detail code {
+  color: var(--text-secondary);
+  background: var(--bg-surface);
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid var(--border-subtle);
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+
+.semantic-type-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 4px;
+  padding: 8px;
+  background: var(--bg-surface);
+  border-radius: var(--radius-sm);
+  border: 1px dashed var(--border-subtle);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-dim);
+}
+
+.semantic-type-detail code {
+  color: var(--accent);
+  margin-right: 6px;
+}
