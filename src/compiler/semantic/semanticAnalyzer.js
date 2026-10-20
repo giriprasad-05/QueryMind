@@ -280,7 +280,7 @@ function validateBinaryExpression(expr, allTableDefs, errors, annotations) {
   // Operator validity check
   annotations.push({ step: 'operator_check', message: `Checking operator '${operator}'...` });
   
-  const validStringOps = ['=', '!='];
+  const validStringOps = ['=', '!=', '~*', '!~*'];
   if (leftType === 'string' && !validStringOps.includes(operator)) {
     errors.push(createSemanticError(
       ERR_INVALID_OPERATOR,

@@ -9,19 +9,34 @@ function escapeString(val) {
   return "'" + String(val).replace(/'/g, "''") + "'";
 }
 
-function buildFilterSQL(filter, indent = "") {
+function buildFilterSQL(filter, indent = "", aliasMap = null) {
   if (filter.type === 'comparison') {
     const safeVal = filter.valueType === 'string' 
       ? (String(filter.value).startsWith("'") ? filter.value : escapeString(filter.value))
       : filter.value;
-    
-    return `${filter.column} ${filter.operator} ${safeVal}`;
+
+    let column = filter.column;
+    if (aliasMap && typeof column === 'string' && column.includes('.')) {
+      const dotIndex = column.indexOf('.');
+      const tableName = column.slice(0, dotIndex);
+      const colName = column.slice(dotIndex + 1);
+      const alias = aliasMap[tableName];
+      if (alias) {
+        column = `${alias}.${colName}`;
+      }
+    }
+
+    return `${column} ${filter.operator} ${safeVal}`;
   }
 
   if (filter.type === 'logical') {
-    const leftSql = buildFilterSQL(filter.left, indent);
-    const rightSql = buildFilterSQL(filter.right, indent);
-    return `${leftSql}\n${indent}${filter.operator} ${rightSql}`;
+    const leftSql = buildFilterSQL(filter.left, indent, aliasMap);
+    const rightSql = buildFilterSQL(filter.right, indent, aliasMap);
+    // Parenthesize a nested logical operand whose operator differs, so the
+    // emitted SQL preserves the intended grouping (e.g. "(A AND B) OR C").
+    const wrap = (sql, child) =>
+      child.type === 'logical' && child.operator !== filter.operator ? `(${sql})` : sql;
+    return `${wrap(leftSql, filter.left)}\n${indent}${filter.operator} ${wrap(rightSql, filter.right)}`;
   }
 
   throw new Error(`SQL Generator: Unknown filter type '${filter.type}'`);
@@ -113,8 +128,18 @@ export function generateSQL(ir) {
       }
     }
 
+    // Build a table → alias map so filter columns match the FROM/JOIN aliases
+    const aliasMap = {};
+    if (hasJoins) {
+      aliasMap[table] = tableAlias;
+      ir.joins.forEach(j => {
+        const rightTable = j.right.split('.')[0];
+        aliasMap[rightTable] = rightTable[0];
+      });
+    }
+
     if (ir.filter) {
-      const whereClause = buildFilterSQL(ir.filter, "  ");
+      const whereClause = buildFilterSQL(ir.filter, "  ", aliasMap);
       sql += `\nWHERE ${whereClause}`;
     }
 
